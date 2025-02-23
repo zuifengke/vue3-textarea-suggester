@@ -29,7 +29,7 @@ import { on, off, debounce } from "../../utils/dom";
 import VueLoading from '../../components/loading'
 
 export default {
-  name: "vue-textarea-suggester",
+  name: "vue3-textarea-suggester",
   components: { VueLoading },
   props: {
     value: {

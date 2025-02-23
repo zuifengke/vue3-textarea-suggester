@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <center>
-      <h2>vue-textarea-suggester</h2>
+      <h2>vue3-textarea-suggester</h2>
       <p>外挂形式存在的suggester，可以与原生textarea或任何组件搭配使用。</p>
       <p>
-        <a href="https://github.com/blryli/vue-textarea-suggester">文档</a>
+        <a href="https://github.com/zuifengke/vue3-textarea-suggester">文档</a>
       </p>
     </center>
     <h3>原生textarea</h3>
     <div class="box">
       <textarea ref="textarea" class="textarea" rows="10" @input="input"></textarea>
     </div>
-    <vue-textarea-suggester
+    <vue3-textarea-suggester
       v-model="extracts"
       :target="target"
       :rules="rules"

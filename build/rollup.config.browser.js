@@ -6,7 +6,7 @@ const config = Object.assign({}, base, {
   output: {
     exports: 'named',
     name: 'VueTextareaSuggester',
-    file: 'dist/vue-textarea-suggester.min.js',
+    file: 'dist/vue3-textarea-suggester.min.js',
     format: 'iife'
   },
 })

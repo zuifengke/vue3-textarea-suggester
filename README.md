@@ -1,36 +1,34 @@
-# vue-textarea-suggester
+# vue3-textarea-suggester
 
 > 外挂形式存在的suggester，可以与原生textarea或任何组件搭配使用。
 
 ### 演示
 
-[github pages](https://blryli.github.io/vue-textarea-suggester/)
+[github pages](https://zuifengke.github.io/vue3-textarea-suggester/)
 
 #### npm 安装
 
 ```js
-npm install vue-textarea-suggester --save
+npm install vue3-textarea-suggester --save
 ```
 
 #### 使用
 
 ```js
-import VueTextaSuggester from 'vue-textarea-suggester'
+import VueTextaSuggester from 'vue3-textarea-suggester'
 
-import 'vue-textarea-suggester/dist/vue-textarea-suggester.css'
+import 'vue3-textarea-suggester/dist/vue3-textarea-suggester.css'
 
 Vue.use(VueTextaSuggester)
 
-// 或者直接使用script导入
-<link src="https://unpkg.com/vue-textarea-suggester/dist/vue-textarea-suggester.css"></link>
-<script src="https://unpkg.com/vue-textarea-suggester/dist/vue-textarea-suggester.min.js"></script>
+
 ```
 
 #### 搭配 原生textarea
 
 ```html
 <textarea ref="textarea" class="textarea" rows="10" @input="input"></textarea>
-<vue-textarea-suggester
+<vue3-textarea-suggester
   v-model="extracts"
   :target="target"
   :rules="rules"
@@ -91,7 +89,7 @@ export default {
   :valueTecalculation="valueTecalculation"
   @change="change"
 />
-<vue-textarea-suggester
+<vue3-textarea-suggester
   remote
   v-model="extracts"
   :target="mdTarget"
@@ -230,7 +228,7 @@ export default {
 </script>
 ```
 
-### vue-textarea-suggester Attributes
+### vue3-textarea-suggester Attributes
 
 |    参数    |    说明      |   类型     |可选值  |默认值|
 | ---------  | ----------  | --------   |----  | ----- |
@@ -252,13 +250,13 @@ export default {
 | enterExtract      | 选中item时 是否提取内容     | array       |-     | true     |
 | data      | 匹配规则成功时，suggester显示列表，remote为true时无效 | array       |-     | []    |
 
-### vue-textarea-suggester Methods
+### vue3-textarea-suggester Methods
 
 |  方法名 |    说明                    |   参数      |
 |-------- |------                      |------       |
 |change  |触发匹配的方法    |    -   |
 
-### vue-textarea-suggester Events
+### vue3-textarea-suggester Events
 
 |  方法名 |    说明                    |   回调参数      |
 |-------- |------                      |------       |

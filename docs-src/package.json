@@ -1,7 +1,7 @@
 {
-  "name": "vue-textarea-suggester-docs",
+  "name": "vue3-textarea-suggester-docs",
   "type": "module",
-  "description": "Docs for vue-textarea-suggester",
+  "description": "Docs for vue3-textarea-suggester",
   "version": "1.0.0",
   "author": "blryli <405549416@qq.com>",
   "private": true,

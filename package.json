@@ -1,14 +1,15 @@
 {
-  "name": "vue-textarea-suggester",
+  "name": "vue3-textarea-suggester",
   "type": "module",
-  "description": "A Vuejs suggester",
-  "version": "1.0.3",
+  "description": "A Vue3 js textarea  suggester",
+  "version": "1.0.0",
   "author": {
     "name": "zuifengke",
     "email": "yehui1989@qq.com"
   },
   "keywords": [
     "vue",
+    "vue3",
     "vuejs",
     "rollup",
     "template",
@@ -17,9 +18,9 @@
     "components"
   ],
   "license": "MIT",
-  "main": "dist/vue-textarea-suggester.umd.js",
-  "module": "dist/vue-textarea-suggester.esm.js",
-  "unpkg": "dist/vue-textarea-suggester.min.js",
+  "main": "dist/vue3-textarea-suggester.umd.js",
+  "module": "dist/vue3-textarea-suggester.esm.js",
+  "unpkg": "dist/vue3-textarea-suggester.min.js",
   "scripts": {
     "build": "npm run build:browser && npm run build:es && npm run build:umd",
     "build:browser": "rollup --config build/rollup.config.browser.js",

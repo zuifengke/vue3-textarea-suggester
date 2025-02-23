@@ -1,6 +1,6 @@
-# vue-textarea-suggester-docs
+# vue3-textarea-suggester-docs
 
-> Docs for vue-textarea-suggester
+> Docs for vue3-textarea-suggester
 
 ## Build Setup
 

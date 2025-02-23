@@ -11,7 +11,7 @@ export default {
     resolve({ extensions: ['.vue'] }),
     vue({ css: false }),
     commonjs(),
-    sass({ output: 'dist/vue-textarea-suggester.css' }),
+    sass({ output: 'dist/vue3-textarea-suggester.css' }),
     babel(),
     replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
   ],
