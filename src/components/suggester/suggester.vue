@@ -14,9 +14,10 @@
         :class="{active: i === activeIndex}"
         @click="enter(i)"
       >
-        <slot :data="d">
-          <strong>{{d.label}}</strong>
-        </slot>
+<!--        <slot :data="d">-->
+<!--          <strong>{{d.label}}</strong>-->
+<!--        </slot>-->
+         <strong>{{d.label}}</strong>
       </li>
     </ul>
   </div>
@@ -118,7 +119,7 @@ export default {
         }
         this.$emit("matched", this.matchedStr, query, this.matchedRule);
         this.showPosition();
-        return;
+
       }
     },
     keyDown(e) {

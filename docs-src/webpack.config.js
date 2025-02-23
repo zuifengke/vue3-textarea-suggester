@@ -1,8 +1,22 @@
-const path = require('path');
-const { VueLoaderPlugin } = require('vue-loader');
-const webpack = require('webpack');
+// 修改前
+// const path = require('path');
+// const { VueLoaderPlugin } = require('vue-loader');
+// const webpack = require('webpack');
 
-module.exports = {
+// 修改后
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { VueLoaderPlugin } from 'vue-loader';
+import webpack from 'webpack';
+
+// 获取当前模块的文件路径
+const __filename = fileURLToPath(import.meta.url);
+// 获取当前模块所在的目录路径
+const __dirname = path.dirname(__filename);
+// 修改前
+// module.exports = {
+// 修改后
+export default {
   mode: 'development',
   entry: ['@babel/polyfill', './src/main.js'],
   output: {
@@ -21,6 +35,18 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader' ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // 将 JS 字符串生成为 style 节点
+          'css-loader',   // 将 CSS 转化成 CommonJS 模块
+          'sass-loader'   // 将 Sass 编译成 CSS
+        ]
+      }
       // 其他规则
     ],
   },

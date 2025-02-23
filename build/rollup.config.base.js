@@ -9,9 +9,9 @@ export default {
   input: 'src/index.js',
   plugins: [
     resolve({ extensions: ['.vue'] }),
+    vue({ css: false }),
     commonjs(),
     sass({ output: 'dist/vue-textarea-suggester.css' }),
-    vue({ css: false }),
     babel(),
     replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
   ],

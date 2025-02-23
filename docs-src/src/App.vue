@@ -19,12 +19,10 @@
       ref="suggester"
     />
 
-
   </div>
 </template>
 
 <script>
-import VueTextareaSuggester from "../../src/components//suggester/suggester.vue";
 export default {
   name: "app",
   data() {
@@ -81,6 +79,7 @@ export default {
   },
   methods: {
     input() {
+      debugger;
       this.$refs.suggester.change();
     },
     change() {

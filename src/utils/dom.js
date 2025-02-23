@@ -1,6 +1,20 @@
-import Vue from 'vue';
+// 修改前
+// import Vue from 'vue';
 
-const isServer = Vue.prototype.$isServer;
+// 修改后
+import { createApp } from 'vue';
+
+// 示例使用
+const app = createApp({
+  // 组件选项
+});
+
+// 修改前
+// const isServer = Vue.prototype.$isServer;
+
+// 修改后
+// 修改后
+const isServer = typeof process !== 'undefined' && process.versions && process.versions.node;
 
 // 用来绑定事件的方法，它是一个自执行的函数，会根据是否运行于服务器和是否支持addEventListener来返回一个function
 export const on = (function () {
@@ -48,7 +62,7 @@ export const throttle = function ( delay, noTrailing, callback, debounceMode ) {
 	var timeoutID;
 	var cancelled = false;
   var lastExec = 0;
-  
+
 	function clearExistingTimeout () {
 		if ( timeoutID ) {
 			clearTimeout(timeoutID);
@@ -67,7 +81,7 @@ export const throttle = function ( delay, noTrailing, callback, debounceMode ) {
 		callback = noTrailing;
 		noTrailing = undefined;
   }
-  
+
 	function wrapper () {
 
 		var self = this;

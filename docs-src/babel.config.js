@@ -1,5 +1,6 @@
-module.exports = {
+import presetEnv from '@babel/preset-env';
+export default {
   'presets': [
-    [require('@babel/preset-env'), { 'modules': false }],
+    [presetEnv, { modules: false }],
   ],
 }

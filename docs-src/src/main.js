@@ -1,6 +1,6 @@
 import {createApp} from 'vue'
 import App from './App.vue'
-import VueTextSuggester from '../../'
+import VueTextSuggester from '../../src/index.js'
 
 import '../../dist/vue-textarea-suggester.css'
 const app = createApp(App);

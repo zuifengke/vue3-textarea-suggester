@@ -1,3 +1,3 @@
-import Suggester from './suggester';
+import Suggester from './suggester.vue';
 
 export default Suggester;
