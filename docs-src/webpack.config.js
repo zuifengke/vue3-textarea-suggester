@@ -1,6 +1,6 @@
-const path = require('path')
-const webpack = require('webpack')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -21,67 +21,43 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]',
-        },
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: {
-                path: path.resolve(__dirname, '.postcssrc.js'),
-              },
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf)\??.*$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: 'resourse/[name].[ext]'
-        }
-      }
+      // 其他规则
     ],
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
+      'vue$': 'vue/dist/vue.esm-bundler.js', // Vue 3 推荐使用
     },
   },
   plugins: [
     new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
   ],
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, '..', 'docs'),
-    disableHostCheck: true,
+    static: {
+      directory: path.join(__dirname, '..', 'docs'),
+    },
+    allowedHosts: 'all',
     port: 7777,
   },
   performance: {
     hints: false,
   },
-  devtool: '#eval-source-map',
-}
+  devtool: 'eval-source-map',
+};
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.mode = 'production'
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.mode = 'production';
+  module.exports.devtool = '#source-map';
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
       },
     }),
-  ])
+  ]);
 }

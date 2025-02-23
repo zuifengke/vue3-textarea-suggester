@@ -18,34 +18,18 @@
       @matched="matched"
       ref="suggester"
     />
-    <h3>md-editor2</h3>
-    <md-editor2
-      ref="md"
-      v-model="value"
-      :toolbars="toolbars"
-      :valueTecalculation="valueTecalculation"
-      @change="change"
-    />
-    <vue-textarea-suggester
-      remote
-      v-model="extracts"
-      :target="mdTarget"
-      :rules="rules"
-      :options="options"
-      :loading="loading"
-      @matched="matched"
-      ref="mdSuggester"
-    ></vue-textarea-suggester>
+
+
   </div>
 </template>
 
 <script>
+import VueTextareaSuggester from "../../src/components//suggester/suggester.vue";
 export default {
   name: "app",
   data() {
     return {
       target: null,
-      mdTarget: null,
       value: `## suggester 显示时\n 响应键盘上下左右按钮事件\n 回车或鼠标左键点击item触发选中\n 已配置符号 @ ! `,
       toolbars: {
         preview: true, // 预览
@@ -100,7 +84,7 @@ export default {
       this.$refs.suggester.change();
     },
     change() {
-      this.$refs.mdSuggester.debouncedChange();
+      //this.$refs.mdSuggester.debouncedChange();
     },
     matched(rule, query, row) {
       console.log(`rule ${JSON.stringify(rule)}`);
@@ -166,7 +150,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.target = this.$refs.textarea;
-      this.mdTarget = document.querySelector(".auto-textarea-input");
+      //this.mdTarget = document.querySelector(".auto-textarea-input");
     });
   }
 };

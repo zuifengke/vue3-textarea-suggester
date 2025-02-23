@@ -24,8 +24,8 @@
 
 <script>
 import { getCursorPos } from "./getCursorPos";
-import { on, off, debounce } from "utils/dom";
-import VueLoading from 'components/loading'
+import { on, off, debounce } from "../../utils/dom";
+import VueLoading from '../../components/loading'
 
 export default {
   name: "vue-textarea-suggester",

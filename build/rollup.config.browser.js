@@ -1,4 +1,4 @@
-import base from './rollup.config.base'
+import base from './rollup.config.base.js'
 // import { uglify } from 'rollup-plugin-uglify'
 // import { minify } from 'uglify-es'
 

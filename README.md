@@ -80,14 +80,7 @@ export default {
 
 #### 搭配 md-editor2
 
-> 安装 md-editor2
 
-```js
-import MdEditor2 from 'md-editor2'
-
-import 'md-editor2/dist/css/index.css'
-
-Vue.use(MdEditor2)
 ```
 
 ```html
