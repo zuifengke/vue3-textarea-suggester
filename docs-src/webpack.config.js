@@ -68,7 +68,7 @@ export default {
       directory: path.join(__dirname, '..', 'docs'),
     },
     allowedHosts: 'all',
-    port: 7777,
+    port: 7779,
   },
   performance: {
     hints: false,

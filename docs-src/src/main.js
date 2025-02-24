@@ -1,10 +1,11 @@
 import {createApp} from 'vue'
 import App from './App.vue'
-import Vue3TextSuggester from '../../src/index.js'
+import plugin from '../../src/index.js'
+//import plugin from '../../dist/vue3-textarea-suggester.esm.js'
 
 import '../../dist/vue3-textarea-suggester.css'
 const app = createApp(App);
-app.use(Vue3TextSuggester)
+app.use(plugin)
 // 禁用性能追踪提示
 app.config.performance = false;
 

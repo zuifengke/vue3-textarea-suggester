@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <center>
-      <h2>vue3-textarea-suggester</h2>
+      <h2>textarea-suggester</h2>
       <p>外挂形式存在的suggester，可以与原生textarea或任何组件搭配使用。</p>
       <p>
         <a href="https://github.com/zuifengke/vue3-textarea-suggester">文档</a>
@@ -16,143 +16,149 @@
       :target="target"
       :rules="rules"
       @matched="matched"
+      :options="options"
       ref="suggester"
     />
-
   </div>
 </template>
 
-<script>
-export default {
-  name: "app",
-  data() {
-    return {
-      target: null,
-      value: `## suggester 显示时\n 响应键盘上下左右按钮事件\n 回车或鼠标左键点击item触发选中\n 已配置符号 @ ! `,
-      toolbars: {
-        preview: true, // 预览
-        bold: true, // 粗体
-        italic: true, // 斜体
-        quote: true, // 引用
-        ol: true, // 有序列表
-        ul: true, // 无序列表
-        link: true, // 链接
-        imagelink: true, // 图片链接
-        code: true, // code
-        subfield: true, // 单双栏模式
-        fullscreen: true // 全屏编辑
-      },
-      // 提取字段替换成需要的字段
-      valueTecalculation: params => {
-        this.extracts.forEach(d => {
-          const rep = `${d.rule}${d.label}`;
-          params = params.replace(
-            new RegExp(rep, "g"),
-            `[${d.rule}${d.label}](http//:/${d.label})`
-          );
-        });
-        return params;
-      },
-      loading: false,
-      options: [],
-      extracts: [],
-      rules: [
-        {
-          rule: /![A-Za-z0-9]+:/,
-          key: "number",
-          data: [{ label: "11111" }, { label: "22222" }]
-        },
-        {
-          rule: /!/,
-          key: "type",
-          enterAdd: ":",
-          enterExtract: false,
-          data: [{ label: "aaaa" }, { label: "bbbb" }]
-        },
-        {
-          rule: /@/,
-          key: "person",
-          data: [{ label: "xxxx" }, { label: "yyyy" }]
-        }
-      ]
-    };
-  },
-  methods: {
-    input() {
-      debugger;
-      this.$refs.suggester.change();
-    },
-    change() {
-      //this.$refs.mdSuggester.debouncedChange();
-    },
-    matched(rule, query, row) {
-      console.log(`rule ${JSON.stringify(rule)}`);
-      console.log(`query ${JSON.stringify(query)}`);
-      console.log(`row ${JSON.stringify(row)}`);
-      if (row) {
-        let list = [];
-        switch (row.key) {
-          case "type":
-            list = [
-              {
-                label: "ASN"
-              },
-              {
-                label: "TCL"
-              },
-              {
-                label: "AOC"
-              }
-            ];
-            break;
-          case "number":
-            list = [
-              {
-                label: "10001"
-              },
-              {
-                label: "10002"
-              },
-              {
-                label: "10003"
-              }
-            ];
-            break;
-          case "person":
-            list = [
-              {
-                label: "lizhili"
-              },
-              {
-                label: "dongqiang"
-              },
-              {
-                label: "zhouqinmin"
-              }
-            ];
-            break;
+<script setup>
+import {nextTick} from "vue";
+import { ref, onMounted } from 'vue';
+import Children from "./Children.vue";
+// 创建响应式引用
+const textarea = ref(null);
+const suggester = ref(null);
 
-          default:
-            list = [];
-            break;
-        }
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-          this.options = list.filter(item => {
-            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
-          });
-        }, 300);
-      }
-    }
+// 定义响应式数据
+const target = ref(null);
+const value = ref(`## suggester 显示时\n 响应键盘上下左右按钮事件\n 回车或鼠标左键点击item触发选中\n 已配置符号 @ ! `);
+const toolbars = ref({
+  preview: true, // 预览
+  bold: true, // 粗体
+  italic: true, // 斜体
+  quote: true, // 引用
+  ol: true, // 有序列表
+  ul: true, // 无序列表
+  link: true, // 链接
+  imagelink: true, // 图片链接
+  code: true, // code
+  subfield: true, // 单双栏模式
+  fullscreen: true // 全屏编辑
+});
+const extracts = ref([]);
+const rules = ref([
+  {
+    rule: /![A-Za-z0-9]+:/,
+    key: "number",
+    data: [{ label: "11111" }, { label: "22222" }]
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.target = this.$refs.textarea;
-      //this.mdTarget = document.querySelector(".auto-textarea-input");
-    });
+  {
+    rule: /!/,
+    key: "type",
+    enterAdd: ":",
+    enterExtract: false,
+    data: [{ label: "aaaa" }, { label: "bbbb" }]
+  },
+  {
+    rule: /@/,
+    key: "person",
+    data: [{ label: "xxxx" }, { label: "yyyy" }]
+  }
+]);
+const loading = ref(false);
+const options = ref([]);
+
+// 提取字段替换成需要的字段
+const valueTecalculation = (params) => {
+  extracts.value.forEach((d) => {
+    const rep = `${d.rule}${d.label}`;
+    params = params.replace(
+      new RegExp(rep, "g"),
+      `[${d.rule}${d.label}](http//:/${d.label})`
+    );
+  });
+  return params;
+};
+
+// 定义方法
+const input = () => {
+  if (suggester.value) {
+    suggester.value.change();
   }
 };
+
+const change = () => {
+  //this.$refs.mdSuggester.debouncedChange();
+};
+const menu=ref(null)
+const matched = (rule, query, row) => {
+
+  if (row) {
+    let list = [];
+    switch (row.key) {
+      case "type":
+        list = [
+          {
+            label: "ASN"
+          },
+          {
+            label: "TCL"
+          },
+          {
+            label: "AOC"
+          }
+        ];
+        break;
+      case "number":
+        list = [
+          {
+            label: "10001"
+          },
+          {
+            label: "10002"
+          },
+          {
+            label: "10003"
+          }
+        ];
+        break;
+      case "person":
+        list = [
+          {
+            label: "lizhili"
+          },
+          {
+            label: "dongqiang"
+          },
+          {
+            label: "zhouqinmin"
+          }
+        ];
+        break;
+
+      default:
+        list = [];
+        break;
+    }
+    loading.value = true;
+    setTimeout(() => {
+      options.value = list.filter((item) => {
+        return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
+      });
+      loading.value = false;
+    }, 300);
+  }
+};
+
+// 挂载后设置目标元素
+onMounted(() => {
+  nextTick(()=>{
+    loading.value = false;
+    target.value = textarea.value;
+    console.log(suggester.value);
+  })
+});
 </script>
 
 <style>

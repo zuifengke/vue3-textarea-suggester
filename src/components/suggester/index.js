@@ -1,3 +1,3 @@
-import Suggester from './suggester.vue';
+import Vue3TextareaSuggester from './Vue3TextareaSuggester.vue';
 
-export default Suggester;
+export default Vue3TextareaSuggester;
